@@ -31,12 +31,13 @@ const Search = ({ history, match }: ItemProps) => {
 
   useIonViewDidEnter(() => {
     const ref = searchRef.current;
-    ref && ref.setFocus();
+    ref && ref.setFocus && ref.setFocus();
   });
 
   useEffect(() => {
     async function search() {
       // Do the search here every time the query changes
+      console.log('Searching');
     }
     search();
   }, [query]);
@@ -52,7 +53,7 @@ const Search = ({ history, match }: ItemProps) => {
                 ref={searchRef}
                 placeholder="Enter query"
                 value={query}
-                onInput={(e: any) => setQuery(e.target.value)}/>
+                onIonChange={(e: any) => setQuery(e.target.value)}/>
         </IonToolbar>
       </IonHeader>
       <IonContent>
