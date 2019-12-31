@@ -23,7 +23,7 @@ interface ItemProps extends RouteComponentProps<{ tab: string }> {
 }
 
 const Settings = ({ history, match }: ItemProps) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
     authGuard(dispatch, match, history);

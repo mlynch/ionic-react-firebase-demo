@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 
 interface User {}
 
@@ -6,6 +6,9 @@ export enum Actions {
   SetUser = 'setUser',
   LoggedIn = 'loggedin',
   LoggedOut = 'loggedout',
+
+  // An action to set some loaded data.
+  SetThings = 'setthings'
 }
 
 const userItem = window.localStorage.getItem('user');
@@ -17,9 +20,15 @@ if (userItem) {
 
 export interface StateType {
   user?: User | null;
+
+  // This is where you'd put references to loaded data
+  // types from Firebase
+  things: any[];
 }
 
 let initialState: StateType = {
+  user: null,
+  things: []
 };
 
 
@@ -31,7 +40,10 @@ let reducer = (state: any, action: any) => {
       return { ...state, user: action.user }
     case Actions.LoggedOut:
       return { ...state, user: null }
+    case Actions.SetThings:
+      return { ...state, things: action.things }
   }
+  return state;
 };
 
 const logger = (reducer: any) => {
@@ -54,7 +66,7 @@ function AppContextProvider(props: any) {
     user
   }
 
-  let [state, dispatch] = React.useReducer(loggerReducer, fullInitialState);
+  let [state, dispatch] = useReducer(loggerReducer, fullInitialState);
   let value = { state, dispatch };
 
   if (user !== state.user) {
