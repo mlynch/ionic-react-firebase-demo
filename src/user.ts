@@ -37,10 +37,14 @@ export async function signup({ name, email, password }: { name: string, email: s
 
   const user = await FirebaseApp.auth().createUserWithEmailAndPassword(email, password);
 
+  console.log('Created user', user);
+
   // Create the associated user table
   await FirebaseApp.firestore().collection("users").doc(user.user!.uid).set({
     bio: ''
   });
+
+  console.log('Created user data');
 
   return user.user!;
 }

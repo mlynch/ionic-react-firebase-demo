@@ -56,8 +56,8 @@ const LoginPage = ({ history, match }: ItemProps) => {
 
       setShowLoading(false);
     } catch (e) {
-      console.error(e);
       setFormErrors(e);
+      setShowLoading(false);
     }
   }
 
@@ -87,7 +87,7 @@ const LoginPage = ({ history, match }: ItemProps) => {
     <IonContent>
       <IonLoading isOpen={showLoading} message="Logging in..." onDidDismiss={() => setShowLoading(false)}/>
       {formErrors ? (
-        <div>
+        <div className="ion-padding" style={{ textAlign: 'center' }}>
           Unable to log in: {formErrors.message}
         </div>
       ) : (null)}
@@ -108,8 +108,9 @@ const LoginPage = ({ history, match }: ItemProps) => {
           <IonButton expand="block" type="submit">Log in</IonButton>
         </IonList>
       </form>
-      <div>
+      <div className="ion-padding" style={{ textAlign: 'center' }}>
         <a className="create" href="#/" onClick={(e) => { e.preventDefault(); goTo('/signup')}}>Create account instead</a>
+        <br />
         <a href="#/" onClick={(e) => { e.preventDefault(); goTo('/reset-password')}}>Forgot your password?</a>
       </div>
     </IonContent>

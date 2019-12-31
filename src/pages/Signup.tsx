@@ -55,6 +55,7 @@ const SignupPage = ({ history, match }: ItemProps) => {
       history.push('/app/home');
     } catch (e) {
       setFormErrors(e);
+      setShowLoading(false);
     }
   }
 
@@ -74,13 +75,13 @@ const SignupPage = ({ history, match }: ItemProps) => {
     </IonHeader>
     <IonContent>
       <IonLoading isOpen={showLoading} message="Creating account..." onDidDismiss={() => setShowLoading(false)}/>
-      <div>
+      <div className="ion-padding" style={{ textAlign: 'center' }}>
         <p>
           Welcome, please create an account
         </p>
       </div>
       {formErrors ? (
-        <div>
+        <div style={{ textAlign: 'center' }}>
           Unable to create account: {formErrors.message}
         </div>
       ) : (null)}
@@ -102,7 +103,7 @@ const SignupPage = ({ history, match }: ItemProps) => {
           <IonButton color="primary" expand="block" type="submit">Create Account</IonButton>
         </IonList>
       </form>
-      <div>
+      <div className="ion-padding" style={{ textAlign: 'center' }}>
         <a href="#/" onClick={(e) => { e.preventDefault(); goTo('/login')}}>Already have an account? Log in</a>
       </div>
     </IonContent>
